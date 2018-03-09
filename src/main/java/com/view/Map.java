@@ -23,10 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -154,7 +152,7 @@ public class Map extends JPanel implements ActionListener {
         // This sets the audio for the game
         try {
             // Opening audio input streams.
-            sequence = MidiSystem.getSequence(new File(this.getClass().getResource("/sfx/musicLow.mid").toURI()));
+            sequence = MidiSystem.getSequence(this.getClass().getResourceAsStream("/sfx/musicLow.mid"));
             music = MidiSystem.getSequencer();
             music.setSequence(sequence);
             music.open();
@@ -176,8 +174,6 @@ public class Map extends JPanel implements ActionListener {
         } catch (MidiUnavailableException e) {
             System.err.println(e.toString());
         } catch (InvalidMidiDataException e) {
-            System.err.println(e.toString());
-        } catch (URISyntaxException e) {
             System.err.println(e.toString());
         }
 
